@@ -1,13 +1,7 @@
 import { useLocalSearchParams } from "expo-router";
 import React, { useEffect, useState } from "react";
-import {
-    Image,
-    Pressable,
-    ScrollView,
-    StyleSheet,
-    Text,
-    View,
-} from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import AppButton from "../../components/appButton/AppButton";
 import { useAppDispatch } from "../../lib/hooks";
 import { addToCart } from "../../lib/slices/cartSlice";
 
@@ -38,9 +32,7 @@ function ProductDetails() {
         <Image source={{ uri: product.image }} style={styles.product_img} />
         <Text style={styles.product_price}>Price: {product.price} $</Text>
         <Text style={styles.product_des}>{product.description}</Text>
-        <Pressable style={styles.button_add_to_cart} onPress={handleAddToCart}>
-          <Text style={styles.buttonText}>Add to Cart</Text>
-        </Pressable>
+        <AppButton title="Add to Cart" handlePress={handleAddToCart} />
       </View>
     </ScrollView>
   );
