@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import {
     Image,
@@ -7,7 +8,6 @@ import {
     Text,
     View,
 } from "react-native";
-
 import { useAppDispatch, useAppSelector } from "../lib/hooks";
 
 import {
@@ -25,8 +25,6 @@ export default function CartScreen() {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>Shopping cart</Text>
-
       {cartProducts.map((item) => (
         <View key={item.id} style={styles.cartItem}>
           <View style={styles.product}>
@@ -44,7 +42,7 @@ export default function CartScreen() {
 
           <View style={styles.quantity}>
             <Pressable onPress={() => dispatch(addToCart(item))}>
-              <Text style={styles.buttonText}>+</Text>
+              <Ionicons name="add-circle-outline" size={28} color="#000" />
             </Pressable>
 
             <Text>{item.quantity}</Text>
@@ -58,7 +56,7 @@ export default function CartScreen() {
                 )
               }
             >
-              <Text style={styles.buttonText}>-</Text>
+              <Ionicons name="remove-circle-outline" size={28} color="#000" />
             </Pressable>
           </View>
 
@@ -74,7 +72,7 @@ export default function CartScreen() {
                 )
               }
             >
-              <Text style={styles.delete}>🗑</Text>
+              <Ionicons name="trash-outline" size={22} color="red" />
             </Pressable>
           </View>
         </View>
@@ -98,12 +96,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: "#F5F5F5",
-  },
-
-  title: {
-    fontSize: 28,
-    fontWeight: "700",
-    marginBottom: 20,
   },
 
   cartItem: {
@@ -132,6 +124,7 @@ const styles = StyleSheet.create({
 
   quantity: {
     alignItems: "center",
+    flexDirection: "row",
     marginHorizontal: 15,
     gap: 8,
   },
@@ -143,6 +136,7 @@ const styles = StyleSheet.create({
 
   price: {
     alignItems: "center",
+    flexDirection: "row",
     gap: 10,
   },
 
