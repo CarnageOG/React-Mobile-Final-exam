@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
 import {
-    StyleSheet,
-    TextInput,
-    TextInputProps,
-    View,
-    ViewStyle,
+  StyleSheet,
+  TextInput,
+  TextInputProps,
+  View,
+  ViewStyle,
 } from "react-native";
 
 type AppInputPropsType = {
