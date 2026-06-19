@@ -1,10 +1,20 @@
 import { useLocalSearchParams } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+    Image,
+    Pressable,
+    ScrollView,
+    StyleSheet,
+    Text,
+    View,
+} from "react-native";
+import { useAppDispatch } from "../../lib/hooks";
+import { addToCart } from "../../lib/slices/cartSlice";
 
 function ProductDetails() {
   const { id } = useLocalSearchParams();
   const [product, setProduct] = useState<any>(null);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${id}`)
@@ -16,6 +26,10 @@ function ProductDetails() {
     return null;
   }
 
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
@@ -24,6 +38,9 @@ function ProductDetails() {
         <Image source={{ uri: product.image }} style={styles.product_img} />
         <Text style={styles.product_price}>Price: {product.price} $</Text>
         <Text style={styles.product_des}>{product.description}</Text>
+        <Pressable style={styles.button_add_to_cart} onPress={handleAddToCart}>
+          <Text style={styles.buttonText}>Add to Cart</Text>
+        </Pressable>
       </View>
     </ScrollView>
   );
@@ -73,5 +90,20 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 22,
     color: "#555",
+  },
+  button_add_to_cart: {
+    backgroundColor: "#000",
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+  },
+
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "600",
   },
 });

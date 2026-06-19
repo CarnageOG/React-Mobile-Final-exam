@@ -9,6 +9,9 @@ import { Stack, useRouter, useSegments } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import "react-native-reanimated";
+import { Provider } from "react-redux";
+import { makeStore } from "./lib/store";
+const store = makeStore();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -30,32 +33,46 @@ export default function RootLayout() {
   }, [segments]);
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: "#FFFFFF",
-          },
-          headerTintColor: "#000000",
-          headerTitleStyle: {
-            color: "#000000",
-          },
-        }}
-      >
-        <Stack.Screen
-          name="(auth)"
-          options={{ headerShown: false, title: "AUTH" }}
-        />
-        <Stack.Screen
-          name="(tabs)"
-          options={{ headerShown: false, title: "MENU" }}
-        />
-        <Stack.Screen
-          name="details"
-          options={{ headerShown: true, title: "Product Details" }}
-        />
-      </Stack>
-      <StatusBar style="dark" />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        <Stack
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: "#FFFFFF",
+            },
+            headerTintColor: "#000000",
+            headerTitleStyle: {
+              color: "#000000",
+            },
+          }}
+        >
+          <Stack.Screen
+            name="(auth)"
+            options={{
+              headerShown: false,
+              title: "AUTH",
+            }}
+          />
+
+          <Stack.Screen
+            name="(tabs)"
+            options={{
+              headerShown: false,
+              title: "MENU",
+            }}
+          />
+
+          <Stack.Screen
+            name="details"
+            options={{
+              headerShown: true,
+              title: "Product Details",
+            }}
+          />
+        </Stack>
+
+        <StatusBar style="dark" />
+      </ThemeProvider>
+    </Provider>
   );
 }
