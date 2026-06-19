@@ -25,68 +25,82 @@ export default function CartScreen() {
 
   return (
     <ScrollView style={styles.container}>
-      {cartProducts.map((item) => (
-        <View key={item.id} style={styles.cartItem}>
-          <View style={styles.product}>
-            <Image
-              source={{
-                uri: item.image,
-              }}
-              style={styles.image}
-            />
+      {cartProducts.length === 0 ? (
+        <View style={styles.emptyContainer}>
+          <Ionicons name="cart-outline" size={70} color="#777" />
 
-            <Text style={styles.name} numberOfLines={2}>
-              {item.title}
-            </Text>
-          </View>
-
-          <View style={styles.quantity}>
-            <Pressable onPress={() => dispatch(addToCart(item))}>
-              <Ionicons name="add-circle-outline" size={28} color="#000" />
-            </Pressable>
-
-            <Text>{item.quantity}</Text>
-
-            <Pressable
-              onPress={() =>
-                dispatch(
-                  decreaseQuantity({
-                    id: item.id,
-                  }),
-                )
-              }
-            >
-              <Ionicons name="remove-circle-outline" size={28} color="#000" />
-            </Pressable>
-          </View>
-
-          <View style={styles.price}>
-            <Text>{(item.price * item.quantity).toFixed(2)} $</Text>
-
-            <Pressable
-              onPress={() =>
-                dispatch(
-                  deleteFromCart({
-                    id: item.id,
-                  }),
-                )
-              }
-            >
-              <Ionicons name="trash-outline" size={22} color="red" />
-            </Pressable>
-          </View>
+          <Text style={styles.emptyText}>Cart is empty</Text>
         </View>
-      ))}
+      ) : (
+        <>
+          {cartProducts.map((item) => (
+            <View key={item.id} style={styles.cartItem}>
+              <View style={styles.product}>
+                <Image
+                  source={{
+                    uri: item.image,
+                  }}
+                  style={styles.image}
+                />
 
-      <View style={styles.totalBox}>
-        <Text style={styles.totalTitle}>Total</Text>
+                <Text style={styles.name} numberOfLines={2}>
+                  {item.title}
+                </Text>
+              </View>
 
-        <Text style={styles.totalPrice}>{total.toFixed(2)} $</Text>
-      </View>
+              <View style={styles.quantity}>
+                <Pressable onPress={() => dispatch(addToCart(item))}>
+                  <Ionicons name="add-circle-outline" size={28} color="#000" />
+                </Pressable>
 
-      <Pressable style={styles.buyButton}>
-        <Text style={styles.buyText}>Buy</Text>
-      </Pressable>
+                <Text>{item.quantity}</Text>
+
+                <Pressable
+                  onPress={() =>
+                    dispatch(
+                      decreaseQuantity({
+                        id: item.id,
+                      }),
+                    )
+                  }
+                >
+                  <Ionicons
+                    name="remove-circle-outline"
+                    size={28}
+                    color="#000"
+                  />
+                </Pressable>
+              </View>
+
+              <View style={styles.price}>
+                <Text>{(item.price * item.quantity).toFixed(2)} $</Text>
+
+                <Pressable
+                  onPress={() =>
+                    dispatch(
+                      deleteFromCart({
+                        id: item.id,
+                      }),
+                    )
+                  }
+                >
+                  <Ionicons name="trash-outline" size={22} color="red" />
+                </Pressable>
+              </View>
+            </View>
+          ))}
+
+          <View style={styles.totalBox}>
+            <Text style={styles.totalTitle}>Total</Text>
+
+            <Text style={styles.totalPrice}>{total.toFixed(2)} $</Text>
+          </View>
+
+          <Pressable style={styles.buyButton}>
+            <Text style={styles.buyText}>Buy</Text>
+          </Pressable>
+        </>
+      )}
     </ScrollView>
   );
 }
@@ -173,5 +187,18 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 16,
     fontWeight: "700",
+  },
+  emptyContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: 150,
+  },
+
+  emptyText: {
+    marginTop: 15,
+    fontSize: 20,
+    fontWeight: "700",
+    color: "#777",
   },
 });
