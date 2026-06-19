@@ -165,12 +165,12 @@ const styles = StyleSheet.create({
     marginTop: 30,
     paddingVertical: 15,
     borderRadius: 10,
-    backgroundColor: "#000",
+    backgroundColor: "#000000",
     alignItems: "center",
   },
 
   buyText: {
-    color: "#fff",
+    color: "#FFFFFF",
     fontSize: 16,
     fontWeight: "700",
   },

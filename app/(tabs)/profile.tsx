@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     gap: 10,
     marginBottom: 20,
     padding: 10,
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFFFF",
     borderRadius: 8,
   },
 });
