@@ -1,20 +1,20 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import {
-    Image,
-    Pressable,
-    ScrollView,
-    StyleSheet,
-    Text,
-    View,
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
 } from "react-native";
 import { useAppDispatch, useAppSelector } from "../lib/hooks";
 
 import {
-    addToCart,
-    decreaseQuantity,
-    deleteFromCart,
-    selectCartTotal,
+  addToCart,
+  decreaseQuantity,
+  deleteFromCart,
+  selectCartTotal,
 } from "../lib/slices/cartSlice";
 
 export default function CartScreen() {
@@ -85,7 +85,7 @@ export default function CartScreen() {
       </View>
 
       <Pressable style={styles.buyButton}>
-        <Text style={styles.buyText}>BUY</Text>
+        <Text style={styles.buyText}>Buy</Text>
       </Pressable>
     </ScrollView>
   );

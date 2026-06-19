@@ -30,17 +30,17 @@ export default function TabTwoScreen() {
     <View style={styles.container}>
       {user?.data && (
         <View style={styles.profile}>
-          <Text>
+          <Text style={styles.text}>
             Name: {user.data.name.firstname} {user.data.name.lastname}
           </Text>
 
-          <Text>Username: {user.data.username}</Text>
+          <Text style={styles.text}>Username: {user.data.username}</Text>
 
-          <Text>Email: {user.data.email}</Text>
+          <Text style={styles.text}>Email: {user.data.email}</Text>
 
-          <Text>Phone: {user.data.phone}</Text>
+          <Text style={styles.text}>Phone: {user.data.phone}</Text>
 
-          <Text>City: {user.data.address.city}</Text>
+          <Text style={styles.text}>City: {user.data.address.city}</Text>
         </View>
       )}
 
@@ -56,15 +56,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5F5F5",
   },
 
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
+  text: {
+    fontSize: 16,
   },
-
   profile: {
     gap: 10,
-    marginBottom: 30,
+    marginBottom: 20,
     padding: 10,
     backgroundColor: "#fff",
     borderRadius: 8,
